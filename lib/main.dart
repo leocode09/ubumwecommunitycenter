@@ -72,16 +72,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(140),
+        child: TopBar(
+          currentIndex: _currentIndex,
+          onTap: _handleNavigation,
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              width: double.infinity,
-              child: TopBar(
-                currentIndex: _currentIndex,
-                onTap: _handleNavigation,
-              ),
-            ),
             _buildPage(_currentIndex),
             const Footer(),
           ],
