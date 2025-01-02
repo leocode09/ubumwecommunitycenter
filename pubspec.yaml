@@ -13,6 +13,7 @@ dependencies:
   firebase_core: ^2.27.1
   google_fonts: ^4.0.4
   win32: ^5.9.0
+  font_awesome_flutter: ^10.8.0
 
 flutter:
   uses-material-design: true

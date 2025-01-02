@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'footer.dart';
 import 'about/about.dart';
 import 'contact/contact.dart';
 import 'does/does.dart';
@@ -71,16 +72,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          TopBar(
-            currentIndex: _currentIndex,
-            onTap: _handleNavigation,
-          ),
-          Expanded(
-            child: _buildPage(_currentIndex),
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: TopBar(
+                currentIndex: _currentIndex,
+                onTap: _handleNavigation,
+              ),
+            ),
+            _buildPage(_currentIndex),
+            const Footer(),
+          ],
+        ),
       ),
     );
   }
