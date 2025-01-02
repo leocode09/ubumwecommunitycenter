@@ -12,46 +12,63 @@ class TopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).colorScheme;
-
     return Container(
       decoration: const BoxDecoration(
-        color: Color(0xFF2A3C35),
+        color: Color(0xFF283734),
+        border: Border(
+          bottom: BorderSide(
+            width: 0,
+            color: Colors.transparent,
+          ),
+        ),
       ),
       child: Column(
         children: [
           Container(
             width: double.infinity,
             color: Colors.yellow,
-            height: 5,
+            height: 6,
           ),
-          const SizedBox(height: 10),
           Row(
             children: [
               Container(
                 color: const Color(0xFF283734),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                child: Image.asset('assets/logo.png', height: 50),
+                padding: const EdgeInsets.only(
+                    left: 32, right: 64, top: 32, bottom: 32),
+                child: Image.asset('assets/logo.png'),
               ),
               Expanded(
                 child: Column(
-                  children: [
+                  children: [ 
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 24, vertical: 12),
+                          horizontal: 24, vertical: 6),
                       color: const Color(0xFF212D2B),
                       child: IntrinsicHeight(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            _buildContactInfo(
-                              icon: Icons.favorite,
-                              text: 'Become a volunteers',
-                              color: const Color(0xFFFFD84D),
-                              showIcon: false,
+                            Row(  
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.only(left: 24),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 12),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFFFD84D),
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
+                                  child: Image.asset('assets/main-menu-heart-icon.png'),
+                                ),
+                                const SizedBox(width: 16),
+                                const Text('Become a volunteers',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: 'Caveat')),
+                              ],
                             ),
-                            
                             const SizedBox(width: 16),
                             _buildContactInfo(
                               icon: Icons.phone,
@@ -93,12 +110,14 @@ class TopBar extends StatelessWidget {
                     ),
                     Container(
                       color: const Color(0xFF31423F),
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 10),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Row(
-                            children: [
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
                               _buildNavItem('Home', 0),
                               _buildNavItem('About Us', 1),
                               _buildNavItem('Mission & Vision', 2),
@@ -107,12 +126,13 @@ class TopBar extends StatelessWidget {
                               _buildNavItem('Contact', 5),
                               _buildNavItem('Tenders', 6),
                             ],
-                          ),
-                          ElevatedButton.icon(
+                          ),),
+                          Padding(padding: const EdgeInsets.only(right: 32),
+                          child: ElevatedButton.icon(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFFFFD84D),
-                              foregroundColor: Colors.black,
+                              foregroundColor: const Color(0xFF31423F),
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 24,
                                 vertical: 12,
@@ -121,15 +141,16 @@ class TopBar extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(24),
                               ),
                             ),
-                            icon: const Icon(Icons.favorite, size: 18),
+                            icon: const Icon(Icons.favorite, size: 16),
                             label: const Text(
                               'Donate now',
                               style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
+                                fontWeight: FontWeight.w900,
+                                fontSize: 12,
                               ),
                             ),
-                          ),
+                          ),),
+                        
                         ],
                       ),
                     ),
@@ -145,7 +166,7 @@ class TopBar extends StatelessWidget {
 
   Widget _buildNavItem(String label, int index) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 0),
       child: TextButton(
         onPressed: () => onTap(index),
         child: Text(
@@ -170,16 +191,16 @@ class TopBar extends StatelessWidget {
   }) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(4),
-      ),
+      // decoration: BoxDecoration(
+      //   color: color.withOpacity(0.1),
+      //   borderRadius: BorderRadius.circular(4),
+      // ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           if (showIcon) ...[
-            Icon(icon, color: const Color(0xFF00A884), size: 20),
-            const SizedBox(width: 8),
+            Icon(icon, color: const Color(0xFF00A884), size: 24),
+            const SizedBox(width: 10),
           ],
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -190,7 +211,7 @@ class TopBar extends StatelessWidget {
                   subtitle,
                   style: TextStyle(
                     color: color.withOpacity(0.8),
-                    fontSize: 10,
+                    fontSize: 12,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -208,7 +229,6 @@ class TopBar extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class MobileDrawer extends StatelessWidget {
@@ -223,11 +243,9 @@ class MobileDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).colorScheme;
-
     return Drawer(
       child: Container(
-        color: theme.primary,
+        color: Theme.of(context).colorScheme.primary,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
@@ -259,8 +277,8 @@ class MobileDrawer extends StatelessWidget {
               child: ElevatedButton.icon(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: theme.secondary,
-                  foregroundColor: theme.onSecondary,
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                  foregroundColor: Theme.of(context).colorScheme.onSecondary,
                 ),
                 icon: const Icon(Icons.favorite, size: 18),
                 label: const Text('Donate now'),
