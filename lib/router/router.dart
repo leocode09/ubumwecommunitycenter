@@ -25,7 +25,13 @@ final router = GoRouter(
         GoRoute(
           path: '/',
           name: 'home',
-          builder: (context, state) => const HomeContent(),
+          pageBuilder: (context, state) => CustomTransitionPage(
+            key: state.pageKey,
+            child: const HomeContent(),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return FadeTransition(opacity: animation, child: child);
+            },
+          ),
         ),
         GoRoute(
           path: '/about',

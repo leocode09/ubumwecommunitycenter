@@ -1,7 +1,50 @@
 import 'package:flutter/material.dart';
 
-class AboutContent extends StatelessWidget {
+class AboutContent extends StatefulWidget {
   const AboutContent({super.key});
+
+  @override
+  State<AboutContent> createState() => _AboutContentState();
+}
+
+class _AboutContentState extends State<AboutContent> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late List<Animation<Offset>> _slideAnimations;
+  
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1500),
+      vsync: this,
+    );
+    
+    // Create multiple slide animations with different delays
+    _slideAnimations = List.generate(
+      5,
+      (index) => Tween<Offset>(
+        begin: const Offset(0, 0.2),
+        end: Offset.zero,
+      ).animate(
+        CurvedAnimation(
+          parent: _controller,
+          curve: Interval(
+            index * 0.1, // Stagger the animations
+            1.0,
+            curve: Curves.easeOut,
+          ),
+        ),
+      ),
+    );
+    
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -9,39 +52,43 @@ class AboutContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Hero Image Section
-              Stack(
-                children: [
-                  Image.asset(
-                    'assets/images/frederick_zacharie.jpg',
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                  const Positioned(
-                    bottom: 16,
-                    left: 16,
-                    child: Card(
-                      color: Color(0xFFFFE17D),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        child: Text(
-                          'Building a dream',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontStyle: FontStyle.italic,
-                          ),
+          // Hero Image Section
+          FadeTransition(
+            opacity: _controller,
+            child: Stack(
+              children: [
+                Image.asset(
+                  'assets/images/frederick_zacharie.jpg',
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+                const Positioned(
+                  bottom: 16,
+                  left: 16,
+                  child: Card(
+                    color: Color(0xFFFFE17D),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      child: Text(
+                        'Building a dream',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontStyle: FontStyle.italic,
                         ),
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
+            ),
+          ),
 
-              // Title Section
-              const Padding(
+          // Title Section
+          SlideTransition(
+            position: _slideAnimations[0],
+            child: FadeTransition(
+              opacity: _controller,
+              child: const Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Text(
                   'Frederick & Zacharie',
@@ -52,9 +99,15 @@ class AboutContent extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+          ),
 
-              // Story Content
-              const Padding(
+          // Story Content
+          SlideTransition(
+            position: _slideAnimations[1],
+            child: FadeTransition(
+              opacity: _controller,
+              child: const Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,9 +152,15 @@ class AboutContent extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
+          ),
 
-              // Genocide Information Card
-              Container(
+          // Genocide Information Card
+          SlideTransition(
+            position: _slideAnimations[2],
+            child: FadeTransition(
+              opacity: _controller,
+              child: Container(
                 margin: const EdgeInsets.all(16.0),
                 padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
@@ -147,9 +206,15 @@ class AboutContent extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
+          ),
 
-              // UCC Background Section
-              Container(
+          // UCC Background Section
+          SlideTransition(
+            position: _slideAnimations[3],
+            child: FadeTransition(
+              opacity: _controller,
+              child: Container(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -259,7 +324,7 @@ class AboutContent extends StatelessWidget {
                   ],
                 ),
               ),
-            ],
+            ),
           ),
         ],
       ),
