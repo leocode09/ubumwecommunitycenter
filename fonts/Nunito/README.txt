@@ -1,21 +1,34 @@
-Caveat Variable Font
+Nunito Variable Font
 ====================
 
-This download contains Caveat as both a variable font and static fonts.
+This download contains Nunito as both variable fonts and static fonts.
 
-Caveat is a variable font with this axis:
+Nunito is a variable font with this axis:
   wght
 
-This means all the styles are contained in a single file:
-  Caveat-VariableFont_wght.ttf
+This means all the styles are contained in these files:
+  Nunito/Nunito-VariableFont_wght.ttf
+  Nunito/Nunito-Italic-VariableFont_wght.ttf
 
 If your app fully supports variable fonts, you can now pick intermediate styles
 that aren’t available as static fonts. Not all apps support variable fonts, and
-in those cases you can use the static font files for Caveat:
-  static/Caveat-Regular.ttf
-  static/Caveat-Medium.ttf
-  static/Caveat-SemiBold.ttf
-  static/Caveat-Bold.ttf
+in those cases you can use the static font files for Nunito:
+  Nunito/static/Nunito-ExtraLight.ttf
+  Nunito/static/Nunito-Light.ttf
+  Nunito/static/Nunito-Regular.ttf
+  Nunito/static/Nunito-Medium.ttf
+  Nunito/static/Nunito-SemiBold.ttf
+  Nunito/static/Nunito-Bold.ttf
+  Nunito/static/Nunito-ExtraBold.ttf
+  Nunito/static/Nunito-Black.ttf
+  Nunito/static/Nunito-ExtraLightItalic.ttf
+  Nunito/static/Nunito-LightItalic.ttf
+  Nunito/static/Nunito-Italic.ttf
+  Nunito/static/Nunito-MediumItalic.ttf
+  Nunito/static/Nunito-SemiBoldItalic.ttf
+  Nunito/static/Nunito-BoldItalic.ttf
+  Nunito/static/Nunito-ExtraBoldItalic.ttf
+  Nunito/static/Nunito-BlackItalic.ttf
 
 Get started
 -----------

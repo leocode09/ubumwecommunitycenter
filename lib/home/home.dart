@@ -114,21 +114,21 @@ class HomeContent extends StatelessWidget {
                           children: [
                             Text(
                               'Disability is not Inability',
-                              style: GoogleFonts.dancingScript(
-                                fontSize: 48,
+                              style: GoogleFonts.caveat(
+                                fontSize: 32,
                                 color: Theme.of(context).colorScheme.secondary,
                                 fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.center,
                             ),
-                            const SizedBox(height: 20),
-                            const Text(
-                              'WE PROVIDE A PLACE WHERE PEOPLE EXPLORE THEIR COMMON HUMANITY',
+                            const SizedBox(height: 30),
+                            Text(
+                              'WE PROVIDE A PLACE WHERE PEOPLE EXPLORE\nTHEIR COMMON HUMANITY',
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 25,
+                              style: GoogleFonts.nunito(
+                                fontSize: 32,
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold,
+                                fontWeight: FontWeight.w800,
                               ),
                             ),
                             const SizedBox(height: 40),
@@ -142,10 +142,10 @@ class HomeContent extends StatelessWidget {
                                   vertical: 20,
                                 ),
                               ),
-                              child: const Text(
+                              child: Text(
                                 'YOUTUBE CHANNEL',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                                style: GoogleFonts.nunito(
+                                  fontWeight: FontWeight.w800,
                                 ),
                               ),
                             ),
@@ -262,12 +262,12 @@ class HomeContent extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Ubumwe translates to\n"unity or togetherness"',
-                            style: TextStyle(
-                              fontSize: 36,
+                            style: GoogleFonts.nunito(
+                              fontSize: 50,
                               color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w800,
                             ),
                           ),
                           const SizedBox(height: 20),
@@ -319,22 +319,22 @@ class HomeContent extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 30),
-                          const Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Column(
                                 children: [
-                                  Icon(Icons.people,
+                                  const Icon(Icons.people,
                                       size: 48, color: Colors.amber),
                                   Text(
                                     'Join our team',
-                                    style: TextStyle(
+                                    style: GoogleFonts.nunito(
                                       color: Colors.white,
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  Text(
+                                  const Text(
                                     'Apply for Volunteering',
                                     style: TextStyle(
                                       color: Colors.white70,
@@ -343,20 +343,20 @@ class HomeContent extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              SizedBox(width: 60),
+                              const SizedBox(width: 60),
                               Column(
                                 children: [
-                                  Icon(Icons.favorite,
+                                  const Icon(Icons.favorite,
                                       size: 48, color: Colors.amber),
                                   Text(
                                     'Start donating',
-                                    style: TextStyle(
+                                    style: GoogleFonts.nunito(
                                       color: Colors.white,
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  Text(
+                                  const Text(
                                     'Your donation is important',
                                     style: TextStyle(
                                       color: Colors.white70,
@@ -378,12 +378,12 @@ class HomeContent extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(25),
                               ),
                             ),
-                            child: const Text(
+                            child: Text(
                               'DISCOVER MORE',
-                              style: TextStyle(
-                                color: Color(0xFF1F3B31),
+                              style: GoogleFonts.nunito(
+                                color: const Color(0xFF1F3B31),
                                 fontSize: 16,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w800,
                               ),
                             ),
                           ),
@@ -395,7 +395,7 @@ class HomeContent extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 300,
+              height: 500,
               width: double.infinity,
               child: Stack(
                 children: [
@@ -407,6 +407,17 @@ class HomeContent extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Image.asset(
+                        'assets/become-volunteer-shape-1.png',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
                   Positioned.fill(
                     child: Container(
                       decoration: BoxDecoration(
@@ -414,8 +425,8 @@ class HomeContent extends StatelessWidget {
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
-                            const Color(0xFF1F3B31).withOpacity(0.9),
-                            const Color(0xFF00715d).withOpacity(0.7),
+                            const Color(0xFF1F3B31).withOpacity(0.1),
+                            const Color(0xFF1F3B31).withOpacity(0.1),
                           ],
                         ),
                       ),
@@ -426,22 +437,25 @@ class HomeContent extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Join your hand with us for a',
-                          style: GoogleFonts.poppins(
+                          'Become volunteers',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.caveat(
                             fontSize: 32,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context).colorScheme.secondary,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
+                        const SizedBox(height: 10),
                         Text(
-                          'better life and future',
-                          style: GoogleFonts.poppins(
-                            fontSize: 32,
+                          'Join your hand with us for a\nbetter life and future',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.nunito(
+                            fontSize: 50,
                             color: Colors.white,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w900,
                           ),
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 30),
                         TextButton(
                           onPressed: () {},
                           style: TextButton.styleFrom(
@@ -452,12 +466,12 @@ class HomeContent extends StatelessWidget {
                               borderRadius: BorderRadius.circular(25),
                             ),
                           ),
-                          child: const Text(
+                          child: Text(
                             'SEND DONATION',
-                            style: TextStyle(
-                              color: Color(0xFF1F3B31),
+                            style: GoogleFonts.nunito(
+                              color: const Color(0xFF1F3B31),
                               fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w800,
                             ),
                           ),
                         ),
@@ -471,20 +485,21 @@ class HomeContent extends StatelessWidget {
               // height: 300,
               width: double.infinity,
               child: Container(
+                color: const Color(0xFF223931),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               'Our Testimonials',
-                              style: GoogleFonts.dancingScript(
+                              style: GoogleFonts.caveat(
                                 fontSize: 24,
                                 color: Theme.of(context).colorScheme.secondary,
                                 fontWeight: FontWeight.bold,
@@ -492,10 +507,10 @@ class HomeContent extends StatelessWidget {
                             ),
                             Text(
                               'Ubumwe\nCommunity Center',
-                              style: GoogleFonts.poppins(
+                              style: GoogleFonts.nunito(
                                 fontSize: 50,
                                 color: Colors.white,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w800,
                               ),
                             ),
                             const SizedBox(height: 60),
@@ -509,36 +524,20 @@ class HomeContent extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(25),
                                 ),
                               ),
-                              child: const Text(
+                              child: Text(
                                 'ASK ANYTHING HERE',
-                                style: TextStyle(
-                                  color: Color(0xFF1F3B31),
+                                style: GoogleFonts.nunito(
+                                  color: const Color(0xFF1F3B31),
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.w800,
                                 ),
                               ),
                             ),
                           ],
                         ),
                         Container(
-                          width: 80,
-                          height: 80,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: Theme.of(context).colorScheme.secondary,
-                              width: 2,
-                            ),
-                          ),
-                          child: ClipOval(
-                            child: Image.asset(
-                              'assets/profile.jpg',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.fromLTRB(50, 72, 50, 44),
+                          alignment: Alignment.bottomCenter,
+                          padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: Theme.of(context).colorScheme.secondary,
@@ -546,13 +545,95 @@ class HomeContent extends StatelessWidget {
                             ),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Text(
-                            'Turashimira Ubumuwe Community Center Kubwo\nkwita kumwana wanjye ufite ubumuga',
-                            style: GoogleFonts.poppins(
-                              fontSize: 16,
-                              color: Colors.white,
-                              fontStyle: FontStyle.italic,
-                            ),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Stack(
+                                    children: [
+                                      for (var i = 0; i < 5; i++)
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Transform.translate(
+                                            offset: Offset(
+                                              [
+                                                -230.0,
+                                                -180.0,
+                                                0.0,
+                                                500.0,
+                                                460.0
+                                              ][i],
+                                              [
+                                                -80.0,
+                                                200.0,
+                                                0.0,
+                                                130.0,
+                                                -40.0
+                                              ][i],
+                                            ),
+                                            child: Container(
+                                              width: (i == 2) ? 120 : 80,
+                                              height: (i == 2) ? 120 : 80,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                  width: 2,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary,
+                                                ),
+                                              ),
+                                              child: ClipOval(
+                                                child: Opacity(
+                                                  opacity: (i == 2) ? 1.0 : 0.2,
+                                                  child: Image.asset(
+                                                    'assets/christine.png',
+                                                    fit: BoxFit.cover,
+                                                    // color: Theme.of(context).colorScheme.secondary,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                    Text(
+                                      'INGABIRE Christine',
+                                      style: GoogleFonts.nunito(
+                                        fontSize: 24,
+                                        color: Colors.white,
+                                        fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                    Text(
+                                      'Mother',
+                                      style: GoogleFonts.caveat(
+                                        fontSize: 20,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                        // fontStyle: FontStyle.italic,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                  ]),
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              Text(
+                                'Turashimira Ubumuwe Community Center Kubwo\nkwita kumwana wanjye ufite ubumuga',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],

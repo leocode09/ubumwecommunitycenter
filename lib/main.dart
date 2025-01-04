@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Ubumwe Community Center',
       theme: ThemeData(
+        fontFamily: 'sans-serif',
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFFf4cf58),
           primary: const Color(0xFF283734),
