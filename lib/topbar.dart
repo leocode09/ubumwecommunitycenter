@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class TopBar extends StatelessWidget {
-  final int currentIndex;
-  final Function(int) onTap;
+  final String currentPath;
 
   const TopBar({
     super.key,
-    required this.currentIndex,
-    required this.onTap,
+    required this.currentPath,
   });
+
+  void _handleNavigation(BuildContext context, String path) {
+    context.go(path);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 170,
       decoration: const BoxDecoration(
         color: Color(0xFF283734),
-        border: Border(
-          bottom: BorderSide(
-            width: 0,
-            color: Colors.transparent,
-          ),
-        ),
       ),
       child: Column(
         children: [
@@ -34,7 +32,7 @@ class TopBar extends StatelessWidget {
               Container(
                 color: const Color(0xFF283734),
                 padding: const EdgeInsets.only(
-                    left: 32, right: 64, top: 32, bottom: 32),
+                    left: 32, right: 64, top: 32, bottom: 34),
                 child: Image.asset('assets/logo.png'),
               ),
               Expanded(
@@ -42,7 +40,7 @@ class TopBar extends StatelessWidget {
                   children: [ 
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 24, vertical: 6),
+                          horizontal: 24, vertical: 12),
                       color: const Color(0xFF212D2B),
                       child: IntrinsicHeight(
                         child: Row(
@@ -118,15 +116,15 @@ class TopBar extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                              _buildNavItem('Home', 0),
-                              _buildNavItem('About Us', 1),
-                              _buildNavItem('Mission & Vision', 2),
-                              _buildNavItem('What we do', 3),
-                              _buildNavItem('Partners', 4),
-                              _buildNavItem('Contact', 5),
-                              _buildNavItem('Tenders', 6),
-                            ],
-                          ),),
+                                _buildNavItem(context, 'Home', '/', '/'),
+                                _buildNavItem(context, 'About Us', '/about', '/about'),
+                                _buildNavItem(context, 'Mission & Vision', '/vision', '/vision'),
+                                _buildNavItem(context, 'What we do', '/does', '/does'),
+                                _buildNavItem(context, 'Partners', '/partners', '/partners'),
+                                _buildNavItem(context, 'Contact', '/contact', '/contact'),
+                                _buildNavItem(context, 'Tenders', '/tenders', '/tenders'),
+                              ],
+                            ),),
                           Padding(padding: const EdgeInsets.only(right: 32),
                           child: ElevatedButton.icon(
                             onPressed: () {},
@@ -164,18 +162,18 @@ class TopBar extends StatelessWidget {
     );
   }
 
-  Widget _buildNavItem(String label, int index) {
+  Widget _buildNavItem(BuildContext context, String label, String path, String currentPath) {
+    final isSelected = this.currentPath == path;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
       child: TextButton(
-        onPressed: () => onTap(index),
+        onPressed: () => _handleNavigation(context, path),
         child: Text(
           label,
           style: TextStyle(
-            color: currentIndex == index ? Colors.white : Colors.white70,
+            color: isSelected ? Colors.white : Colors.white70,
             fontSize: 15,
-            fontWeight:
-                currentIndex == index ? FontWeight.bold : FontWeight.normal,
+            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
           ),
         ),
       ),
