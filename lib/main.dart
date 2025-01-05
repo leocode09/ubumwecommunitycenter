@@ -4,12 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'router/router.dart';
 import 'topbar.dart';
 import 'footer.dart';
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 void main() {
-  // Set URL strategy before running app
-  setUrlStrategy(PathUrlStrategy());
-
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
@@ -26,7 +22,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'sans-serif',
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFFf4cf58),
-          primary: const Color(0xFF283734),
+          primary: const Color(0xFF212D2B),
           secondary: const Color(0xFFFFD966),
           tertiary: const Color(0xFF00A884),
         ),

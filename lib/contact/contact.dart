@@ -175,12 +175,12 @@ class _ContactContentState extends State<ContactContent> {
                 color: Colors.black12,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   // Helpline
                   Column(
-                    children: const [
+                    children: [
                       CircleAvatar(
                         backgroundColor: Color(0xFFFFD700),
                         child: Icon(Icons.phone, color: Colors.black),
@@ -203,7 +203,7 @@ class _ContactContentState extends State<ContactContent> {
                   ),
                   // Email
                   Column(
-                    children: const [
+                    children: [
                       CircleAvatar(
                         backgroundColor: Color(0xFFFFD700),
                         child: Icon(Icons.email, color: Colors.black),
@@ -226,7 +226,7 @@ class _ContactContentState extends State<ContactContent> {
                   ),
                   // Address
                   Column(
-                    children: const [
+                    children: [
                       CircleAvatar(
                         backgroundColor: Color(0xFFFFD700),
                         child: Icon(Icons.location_on, color: Colors.black),
