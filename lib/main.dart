@@ -46,6 +46,7 @@ class MainLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(131),
         child: TopBar(
@@ -57,7 +58,6 @@ class MainLayout extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              color: Theme.of(context).colorScheme.primary,
               child: child,
             ),
             const Footer(),

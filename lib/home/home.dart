@@ -270,13 +270,13 @@ class HomeContent extends StatelessWidget {
                               fontWeight: FontWeight.w800,
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 10),
                           Text(
                             'The Values of Ubumwe Community Center are:',
-                            style: GoogleFonts.poppins(
-                              fontSize: 18,
+                            style: GoogleFonts.caveat(
+                              fontSize: 24,
                               color: Colors.teal,
-                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.w800,
                             ),
                           ),
                           const SizedBox(height: 20),
@@ -296,8 +296,32 @@ class HomeContent extends StatelessWidget {
                                     const EdgeInsets.symmetric(vertical: 4),
                                 child: Row(
                                   children: [
-                                    const Icon(Icons.circle,
-                                        color: Colors.amber, size: 12),
+                                    Stack(
+                                      children: [
+                                        Container(
+                                          width: 18,
+                                          height: 18,
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Color.fromARGB(118, 18, 18, 18),
+                                          ),
+                                          child: Stack(
+                                            clipBehavior: Clip.none,
+                                            children: [
+                                              Positioned(
+                                                top: -6,
+                                                left: 0,
+                                                child: 
+                                              Icon(
+                                                Icons.check,
+                                                size: 25,
+                                                color: Theme.of(context).colorScheme.secondary,
+                                                weight: 2.5,
+                                            ),),]
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                     const SizedBox(width: 10),
                                     Text(
                                       value,
@@ -306,6 +330,7 @@ class HomeContent extends StatelessWidget {
                                         fontSize: 16,
                                       ),
                                     ),
+                                    const SizedBox(height: 10),
                                   ],
                                 ),
                               )),
@@ -638,7 +663,7 @@ class HomeContent extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 60),
                   ],
                 ),
               ),
