@@ -16,7 +16,7 @@ final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 final router = GoRouter(
   navigatorKey: _rootNavigatorKey,
   initialLocation: '/',
-  debugLogDiagnostics: true, // Disable in production
+  debugLogDiagnostics: true,
   routes: [
     ShellRoute(
       builder: (context, state, child) {
@@ -26,13 +26,7 @@ final router = GoRouter(
         GoRoute(
           path: '/',
           name: 'home',
-          pageBuilder: (context, state) => CustomTransitionPage(
-            key: state.pageKey,
-            child: const HomeContent(),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              return FadeTransition(opacity: animation, child: child);
-            },
-          ),
+          builder: (context, state) => const HomeContent(),
         ),
         GoRoute(
           path: '/about',

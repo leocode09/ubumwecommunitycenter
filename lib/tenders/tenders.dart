@@ -8,24 +8,6 @@ import 'package:url_launcher/url_launcher.dart';
 class ImageDisplayWidget extends StatelessWidget {
   const ImageDisplayWidget({super.key});
 
-  Future<void> _downloadPDF() async {
-    const String pdfUrl = 'assets/TenderNoticeEu2024.pdf';
-    try {
-      if (kIsWeb) {
-        // Web platform
-        // ignore: undefined_prefixed_name
-        js.context.callMethod('open', [pdfUrl]);
-      } else {
-        // Mobile platforms
-        if (!await launchUrl(Uri.parse(pdfUrl))) {
-          throw Exception('Could not launch $pdfUrl');
-        }
-      }
-    } catch (e) {
-      debugPrint('Error downloading PDF: $e');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

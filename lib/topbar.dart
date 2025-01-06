@@ -4,13 +4,34 @@ import 'package:go_router/go_router.dart';
 class TopBar extends StatelessWidget {
   final String currentPath;
 
-  const TopBar({
+  final List<String> _pageOrder = [
+    '/',
+    '/about',
+    '/vision',
+    '/does',
+    '/partners',
+    '/contact',
+    '/tenders',
+    '/donate'
+  ];
+
+  int _getPageIndex(String path) {
+    return _pageOrder.indexOf(path);
+  }
+
+  TopBar({
     super.key,
     required this.currentPath,
   });
 
   void _handleNavigation(BuildContext context, String path) {
-    context.go(path);
+    final currentIndex = _getPageIndex(currentPath);
+    final targetIndex = _getPageIndex(path);
+    final slideFromRight = targetIndex > currentIndex;
+
+    if (context.mounted) {
+      context.push(path, extra: slideFromRight);
+    }
   }
 
   @override
@@ -127,10 +148,14 @@ class TopBar extends StatelessWidget {
                             ),),
                           Padding(padding: const EdgeInsets.only(right: 32),
                           child: ElevatedButton.icon(
-                            onPressed: () {},
+                            onPressed: () => context.go('/donate'),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFFFD700),
-                              foregroundColor: const Color(0xFF31423F),
+                              backgroundColor: currentPath == '/donate' 
+                                ? const Color(0xFF263331)  // Selected color
+                                : const Color(0xFFFFD700), // Default color
+                              foregroundColor: currentPath == '/donate'
+                                ? const Color(0xFFFFD700)  // Selected text color
+                                : const Color(0xFF263331), // Default text color
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 24,
                                 vertical: 12,
@@ -171,7 +196,7 @@ class TopBar extends StatelessWidget {
         child: Text(
           label,
           style: TextStyle(
-            color: isSelected ? Colors.white : Colors.white70,
+            color: isSelected ? Theme.of(context).colorScheme.secondary : Colors.white70,
             fontSize: 15,
             fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
           ),
