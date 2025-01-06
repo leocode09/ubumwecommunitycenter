@@ -87,9 +87,8 @@ class VisionContent extends StatelessWidget {
                       Text(
                         'Get to know about Ubumwe Community Center',
                         style: GoogleFonts.caveat(
-                          fontSize: 18,
+                          fontSize: 24,
                           color: const Color(0xFF00C897),
-                          fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.w800,
                         ),
                       ),

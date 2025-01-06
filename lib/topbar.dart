@@ -36,6 +36,43 @@ class TopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDesktop = MediaQuery.of(context).size.width >= 1024;
+
+    if (!isDesktop) {
+      return AppBar(
+        backgroundColor: const Color(0xFF283734),
+        leading: IconButton(
+          icon: const Icon(Icons.menu, color: Colors.white),
+          onPressed: () => Scaffold.of(context).openDrawer(),
+        ),
+        title: Image.asset('assets/logo.png', height: 40),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: ElevatedButton.icon(
+              onPressed: () => context.go('/donate'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: currentPath == '/donate' 
+                  ? const Color(0xFF263331) 
+                  : const Color(0xFFFFD700),
+                foregroundColor: currentPath == '/donate'
+                  ? const Color(0xFFFFD700)
+                  : const Color(0xFF263331),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+              ),
+              icon: const Icon(Icons.favorite, size: 16),
+              label: const Text('Donate',
+                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
     return Container(
       height: 170,
       decoration: const BoxDecoration(

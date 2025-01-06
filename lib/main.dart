@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'router/router.dart';
 import 'topbar.dart';
 import 'footer.dart';
+import 'sidebar.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,16 +43,18 @@ class MainLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDesktop = MediaQuery.of(context).size.width >= 1024;
+    final currentPath = GoRouterState.of(context).uri.path;
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
+      drawer: isDesktop ? null : Sidebar(currentPath: currentPath),
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(131),
-        child: TopBar(
-          currentPath: GoRouterState.of(context).uri.path,
-        ),
+        preferredSize: Size.fromHeight(isDesktop ? 131 : 56),
+        child: TopBar(currentPath: currentPath),
       ),
       body: SingleChildScrollView(
-        key: ValueKey(GoRouterState.of(context).uri.path),
+        key: ValueKey(currentPath),
         child: Column(
           children: [
             Container(
