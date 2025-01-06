@@ -24,7 +24,7 @@ class TopBar extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            color: Colors.yellow,
+            color: const Color(0xFFFFD700),
             height: 6,
           ),
           Row(
@@ -53,7 +53,7 @@ class TopBar extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 12, vertical: 12),
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFFFFD84D),
+                                    color: const Color(0xFFFFD700),
                                     borderRadius: BorderRadius.circular(100),
                                   ),
                                   child: Image.asset('assets/main-menu-heart-icon.png'),
@@ -129,7 +129,7 @@ class TopBar extends StatelessWidget {
                           child: ElevatedButton.icon(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFFFD84D),
+                              backgroundColor: const Color(0xFFFFD700),
                               foregroundColor: const Color(0xFF31423F),
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 24,
