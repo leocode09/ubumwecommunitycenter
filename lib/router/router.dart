@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../about/about.dart';
 import '../contact/contact.dart';
 import '../does/does.dart';
+import '../donate/donate.dart';
 import '../home/home.dart';
 import '../partners/partners.dart';
 import '../tenders/tenders.dart';
@@ -62,6 +63,11 @@ final router = GoRouter(
           path: '/tenders',
           name: 'tenders',
           builder: (context, state) => const TendersContent(),
+        ),
+        GoRoute(
+          path: '/donate',
+          name: 'donate',
+          builder: (context, state) => const DonateContent(),
         ),
       ],
     ),

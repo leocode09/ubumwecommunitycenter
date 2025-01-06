@@ -54,6 +54,9 @@ class MainLayout extends StatelessWidget {
         child: Column(
           children: [
             Container(
+              constraints: BoxConstraints(
+                minHeight: MediaQuery.of(context).size.height,
+              ),
               child: child,
             ),
             const Footer(),

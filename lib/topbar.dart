@@ -162,8 +162,8 @@ class TopBar extends StatelessWidget {
     );
   }
 
-  Widget _buildNavItem(BuildContext context, String label, String path, String currentPath) {
-    final isSelected = this.currentPath == path;
+  Widget _buildNavItem(BuildContext context, String label, String path, String matchPath) {
+    final isSelected = currentPath == matchPath;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
       child: TextButton(
