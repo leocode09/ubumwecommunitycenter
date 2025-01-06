@@ -13,9 +13,9 @@ class ImageDisplayWidget extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Image.asset('/TenderNoticeEu2024-1.png'),
+          Image.asset('assets/TenderNoticeEu2024-1.png'),
           const SizedBox(height: 16),
-          Image.asset('/TenderNoticeEu2024-2.png'),
+          Image.asset('assets/TenderNoticeEu2024-2.png'),
         ],
       ),
     );
