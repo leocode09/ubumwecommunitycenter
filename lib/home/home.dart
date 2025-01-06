@@ -48,7 +48,7 @@ class HomeContent extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: 500,
+              height: MediaQuery.of(context).size.height * 0.7,
               width: double.infinity,
               child: Stack(
                 children: [
@@ -108,48 +108,59 @@ class HomeContent extends StatelessWidget {
                   SafeArea(
                     child: Center(
                       child: SingleChildScrollView(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.of(context).size.width * 0.05,
+                        ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               'Disability is not Inability',
                               style: GoogleFonts.caveat(
-                                fontSize: 32,
+                                fontSize: MediaQuery.of(context).size.width < 600 ? 24 : 32,
                                 color: Theme.of(context).colorScheme.secondary,
                                 fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.center,
                             ),
-                            const SizedBox(height: 30),
+                            SizedBox(height: MediaQuery.of(context).size.width < 600 ? 20 : 30),
                             Text(
-                              'WE PROVIDE A PLACE WHERE PEOPLE EXPLORE\nTHEIR COMMON HUMANITY',
+                              MediaQuery.of(context).size.width < 600
+                                  ? 'WE PROVIDE A PLACE\nWHERE PEOPLE EXPLORE\nTHEIR COMMON HUMANITY'
+                                  : 'WE PROVIDE A PLACE WHERE PEOPLE EXPLORE\nTHEIR COMMON HUMANITY',
                               textAlign: TextAlign.center,
                               style: GoogleFonts.nunito(
-                                fontSize: 32,
+                                fontSize: MediaQuery.of(context).size.width < 600 ? 24 : 32,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w800,
                               ),
                             ),
-                            const SizedBox(height: 40),
-                            ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    Theme.of(context).colorScheme.secondary,
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 40,
-                                  vertical: 20,
-                                ),
+                            SizedBox(height: MediaQuery.of(context).size.width < 600 ? 30 : 40),
+                            ConstrainedBox(
+                              constraints: BoxConstraints(
+                                maxWidth: MediaQuery.of(context).size.width < 600 ? 200 : 250,
                               ),
-                              child: Text(
-                                'YOUTUBE CHANNEL',
-                                style: GoogleFonts.nunito(
-                                  fontWeight: FontWeight.w800,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: MediaQuery.of(context).size.width < 600 ? 20 : 40,
+                                    vertical: MediaQuery.of(context).size.width < 600 ? 15 : 20,
+                                  ),
+                                ),
+                                child: FittedBox(
+                                  child: Text(
+                                    'YOUTUBE CHANNEL',
+                                    style: GoogleFonts.nunito(
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: MediaQuery.of(context).size.width < 600 ? 14 : 16,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 60),
+                            SizedBox(height: MediaQuery.of(context).size.width < 600 ? 40 : 60),
                           ],
                         ),
                       ),
@@ -158,6 +169,7 @@ class HomeContent extends StatelessWidget {
                 ],
               ),
             ),
+            
             SizedBox(
               width: double.infinity,
               child: Container(
@@ -419,6 +431,7 @@ class HomeContent extends StatelessWidget {
                 ),
               ),
             ),
+           
             SizedBox(
               height: 500,
               width: double.infinity,
