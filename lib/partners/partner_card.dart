@@ -17,9 +17,13 @@ class PartnerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get screen width
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
+
     return Container(
-      padding: const EdgeInsets.all(24.0),
-      width: MediaQuery.of(context).size.width * 0.5,
+      padding: EdgeInsets.all(isMobile ? 16.0 : 24.0),
+      width: isMobile ? screenWidth : screenWidth * 0.5,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -29,14 +33,14 @@ class PartnerCard extends StatelessWidget {
             child: Text(
               title,
               style: GoogleFonts.nunito(
-                fontSize: 32,
+                fontSize: isMobile ? 24 : 32,
                 fontWeight: FontWeight.w900,
                 color: Theme.of(context).colorScheme.secondary,
                 height: 1.2,
               ),
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: isMobile ? 16 : 24),
 
           // Optional Image with year tag
           if (imagePath != null) ...[
@@ -80,8 +84,8 @@ class PartnerCard extends StatelessWidget {
           // Description Text
           Text(
             description,
-            style: const TextStyle(
-              fontSize: 16,
+            style: TextStyle(
+              fontSize: isMobile ? 14 : 16,
               height: 1.6,
               color: Colors.white70,
             ),
