@@ -5,22 +5,58 @@ import 'package:google_fonts/google_fonts.dart';
 class ImageDisplayWidget extends StatelessWidget {
   const ImageDisplayWidget({super.key});
 
+  void _showImagePreview(BuildContext context, String imagePath) {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: const EdgeInsets.all(8),
+        child: Stack(
+          alignment: Alignment.topRight,
+          children: [
+            InteractiveViewer(
+              child: Image.asset(
+                imagePath,
+                fit: BoxFit.contain,
+              ),
+            ),
+            IconButton(
+              icon: const Icon(Icons.close, color: Colors.white),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Image.asset(
-            'assets/TenderNoticeEu2024-1.png',
-            // Make images responsive
-            width: double.infinity,
-            fit: BoxFit.contain,
+          GestureDetector(
+            onTap: () => _showImagePreview(
+              context, 
+              'assets/TenderNoticeEu2024-1.png',
+            ),
+            child: Image.asset(
+              'assets/TenderNoticeEu2024-1.png',
+              width: double.infinity,
+              fit: BoxFit.contain,
+            ),
           ),
           const SizedBox(height: 16),
-          Image.asset(
-            'assets/TenderNoticeEu2024-2.png',
-            width: double.infinity,
-            fit: BoxFit.contain,
+          GestureDetector(
+            onTap: () => _showImagePreview(
+              context, 
+              'assets/TenderNoticeEu2024-2.png',
+            ),
+            child: Image.asset(
+              'assets/TenderNoticeEu2024-2.png',
+              width: double.infinity,
+              fit: BoxFit.contain,
+            ),
           ),
         ],
       ),
