@@ -16,11 +16,153 @@ class _ContactContentState extends State<ContactContent> {
   final _subjectController = TextEditingController();
   final _messageController = TextEditingController();
 
+  Widget _buildContactForm(BuildContext context, bool isMobile) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          if (isMobile) ...[
+            // Mobile: Stack inputs vertically
+            _buildTextField(_nameController, 'Your name'),
+            const SizedBox(height: 16),
+            _buildTextField(_emailController, 'Email address'),
+            const SizedBox(height: 16),
+            _buildTextField(_phoneController, 'Phone'),
+            const SizedBox(height: 16),
+            _buildTextField(_subjectController, 'Subject'),
+          ] else ...[
+            // Desktop: Two inputs per row
+            Row(
+              children: [
+                Expanded(child: _buildTextField(_nameController, 'Your name')),
+                const SizedBox(width: 16),
+                Expanded(
+                    child: _buildTextField(_emailController, 'Email address')),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(child: _buildTextField(_phoneController, 'Phone')),
+                const SizedBox(width: 16),
+                Expanded(child: _buildTextField(_subjectController, 'Subject')),
+              ],
+            ),
+          ],
+          const SizedBox(height: 16),
+          _buildTextField(_messageController, 'Write a message', maxLines: 6),
+          const SizedBox(height: 24),
+          // Submit Button remains the same
+          ElevatedButton(
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                // Handle form submission
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFFFFD700),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 32,
+                vertical: 16,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(24),
+              ),
+            ),
+            child: const Text(
+              'SEND A MESSAGE',
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTextField(
+    TextEditingController controller,
+    String hintText, {
+    int? maxLines,
+  }) {
+    return TextFormField(
+      controller: controller,
+      maxLines: maxLines ?? 1,
+      decoration: InputDecoration(
+        hintText: hintText,
+        filled: true,
+        fillColor: Colors.white,
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+          borderSide: BorderSide.none,
+        ),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      ),
+    );
+  }
+
+  Widget _buildContactInfo(BuildContext context, bool isMobile) {
+    final contactItems = [
+      const _ContactItem(
+        icon: Icons.phone,
+        title: 'Helpline',
+        detail: '+250 788 652 294',
+      ),
+      const _ContactItem(
+        icon: Icons.email,
+        title: 'Email',
+        detail: 'info@ubumwecommunitycenter.rw',
+      ),
+      const _ContactItem(
+        icon: Icons.location_on,
+        title: 'Address',
+        detail: 'P.O BOX 312 Gisenyi, Rubavu, Rwanda',
+      ),
+    ];
+
+    return SizedBox(
+      width: double.infinity,
+      child: isMobile
+          ? Column(
+              children: contactItems.map((item) {
+                final index = contactItems.indexOf(item);
+                return Column(
+                  children: [
+                    item.build(),
+                    if (index < contactItems.length - 1)
+                      const SizedBox(height: 16),
+                  ],
+                );
+              }).toList(),
+            )
+          : Row(
+              children: contactItems.asMap().entries.map((entry) {
+                final index = entry.key;
+                return Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: index == 1 ? 16.0 : 0,
+                    ),
+                    child: entry.value.build(),
+                  ),
+                );
+              }).toList(),
+            ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 768;
+    final contentWidth = isMobile ? double.infinity : screenWidth * 0.7;
+
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: EdgeInsets.all(isMobile ? 16.0 : 24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -47,242 +189,18 @@ class _ContactContentState extends State<ContactContent> {
             ),
             const SizedBox(height: 40),
 
-            // Contact Form
+            // Responsive form
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.7,
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    // Name and Email Row
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            controller: _nameController,
-                            decoration: const InputDecoration(
-                              hintText: 'Your name',
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(12)),
-                                borderSide: BorderSide.none,
-                              ),
-                              contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: TextFormField(
-                            controller: _emailController,
-                            decoration: const InputDecoration(
-                              hintText: 'Email address',
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(12)),
-                                borderSide: BorderSide.none,
-                              ),
-                              contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-
-                    // Phone and Subject Row
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            controller: _phoneController,
-                            decoration: const InputDecoration(
-                              hintText: 'Phone',
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(12)),
-                                borderSide: BorderSide.none,
-                              ),
-                              contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: TextFormField(
-                            controller: _subjectController,
-                            decoration: const InputDecoration(
-                              hintText: 'Subject',
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(12)),
-                                borderSide: BorderSide.none,
-                              ),
-                              contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-
-                    // Message TextArea
-                    TextFormField(
-                      controller: _messageController,
-                      maxLines: 6,
-                      decoration: const InputDecoration(
-                        hintText: 'Write a message',
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
-                          borderSide: BorderSide.none,
-                        ),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-
-                    // Submit Button
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          // Handle form submission
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFFFD700),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 32,
-                          vertical: 16,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                      ),
-                      child: const Text(
-                        'SEND A MESSAGE',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              width: contentWidth,
+              child: _buildContactForm(context, isMobile),
             ),
             const SizedBox(height: 48),
 
-            // Contact Information
-            Container(
-              width: MediaQuery.of(context).size.width * 0.7,
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: Colors.black12,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: const IntrinsicHeight(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    // Helpline Column
-                    Column(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Color(0xFFFFD700),
-                          child: Icon(Icons.phone, color: Colors.black),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'Helpline',
-                          style: TextStyle(
-                            color: Colors.white70,
-                          ),
-                        ),
-                        Text(
-                          '+250 788 652 294',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    // Vertical Divider
-                    SizedBox(
-                      height: double.infinity,
-                      child: VerticalDivider(
-                        color: Colors.white24,
-                        thickness: 1,
-                        width: 20,
-                      ),
-                    ),
-                    // Email Column
-                    Column(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Color(0xFFFFD700),
-                          child: Icon(Icons.email, color: Colors.black),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'Send email',
-                          style: TextStyle(
-                            color: Colors.white70,
-                          ),
-                        ),
-                        Text(
-                          'info@ubumwecommunitycenter.rw',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    // Second Vertical Divider
-                    SizedBox(
-                      height: double.infinity,
-                      child: VerticalDivider(
-                        color: Colors.white24,
-                        thickness: 1,
-                        width: 20,
-                      ),
-                    ),
-                    // Address Column
-                    Column(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Color(0xFFFFD700),
-                          child: Icon(Icons.location_on, color: Colors.black),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'P.O BOX 312 Gisenyi',
-                          style: TextStyle(
-                            color: Colors.white70,
-                          ),
-                        ),
-                        Text(
-                          'Rubavu, Rwanda',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+            // Responsive contact info
+            SizedBox(
+              width: contentWidth,
+              child: _buildContactInfo(context, isMobile),
             ),
-            
-            
             const SizedBox(height: 48),
           ],
         ),
@@ -298,5 +216,74 @@ class _ContactContentState extends State<ContactContent> {
     _subjectController.dispose();
     _messageController.dispose();
     super.dispose();
+  }
+}
+
+class _ContactItem {
+  final IconData icon;
+  final String title;
+  final String detail;
+
+  const _ContactItem({
+    required this.icon,
+    required this.title,
+    required this.detail,
+  });
+
+  Widget build() {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 24,
+        vertical: 24,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: Colors.white.withOpacity(0.1),
+          width: 1,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFFFD700).withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  icon,
+                  color: const Color(0xFFFFD700),
+                  size: 24,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          SelectableText(
+            detail,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
