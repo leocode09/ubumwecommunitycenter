@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Sidebar extends StatelessWidget {
   final String currentPath;
@@ -35,7 +36,20 @@ class Sidebar extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.asset('assets/logo.png', height: 40, width: double.infinity),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          context.go('/');
+                        },
+                        child: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: Image.asset(
+                            'assets/logo.png',
+                            height: 40,
+                            width: double.infinity,
+                          ),
+                        ),
+                      ),
                       const SizedBox(height: 8),
                       Container(
                         padding: const EdgeInsets.symmetric(vertical: 4),
@@ -209,6 +223,21 @@ class Sidebar extends StatelessWidget {
               ),
             )
           : null,
+      onTap: () async {
+        final Uri uri;
+        if (icon == Icons.phone) {
+          uri = Uri.parse('tel:${text.replaceAll(RegExp(r'[^\d+]'), '')}');
+        } else if (icon == Icons.email) {
+          uri = Uri.parse('mailto:$text');
+        } else {
+          return;
+        }
+
+        if (!await launchUrl(uri)) {
+          // Handle error - you might want to show a message to the user
+          debugPrint('Could not launch $uri');
+        }
+      },
     );
   }
 }

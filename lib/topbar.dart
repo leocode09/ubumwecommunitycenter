@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TopBar extends StatelessWidget {
   final String currentPath;
@@ -45,7 +46,13 @@ class TopBar extends StatelessWidget {
           icon: const Icon(Icons.menu, color: Colors.white),
           onPressed: () => Scaffold.of(context).openDrawer(),
         ),
-        title: Image.asset('assets/logo.png', height: 40),
+        title: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: () => context.go('/'),
+            child: Image.asset('assets/logo.png', height: 40),
+          ),
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
@@ -104,26 +111,29 @@ class TopBar extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(  
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.only(left: 24),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 12, vertical: 12),
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFFFFD700),
-                                    borderRadius: BorderRadius.circular(100),
+                            InkWell(
+                              onTap: () => context.go('/contact'),
+                              child: Row(  
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.only(left: 24),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 12, vertical: 12),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFFFD700),
+                                      borderRadius: BorderRadius.circular(100),
+                                    ),
+                                    child: Image.asset('assets/main-menu-heart-icon.png'),
                                   ),
-                                  child: Image.asset('assets/main-menu-heart-icon.png'),
-                                ),
-                                const SizedBox(width: 16),
-                                const Text('Become a volunteers',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w700,
-                                        fontFamily: 'Caveat')),
-                              ],
+                                  const SizedBox(width: 16),
+                                  const Text('Become a volunteers',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: 'Caveat')),
+                                ],
+                              ),
                             ),
                             const SizedBox(width: 16),
                             _buildContactInfo(
@@ -249,43 +259,58 @@ class TopBar extends StatelessWidget {
     required Color color,
     bool showIcon = true,
   }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      // decoration: BoxDecoration(
-      //   color: color.withOpacity(0.1),
-      //   borderRadius: BorderRadius.circular(4),
-      // ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (showIcon) ...[
-            Icon(icon, color: const Color(0xFF00A884), size: 24),
-            const SizedBox(width: 10),
-          ],
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () async {
+          final Uri uri;
+          if (icon == Icons.phone) {
+            uri = Uri.parse('tel:${text.replaceAll(RegExp(r'[^\d+]'), '')}');
+          } else if (icon == Icons.email) {
+            uri = Uri.parse('mailto:$text');
+          } else {
+            return;
+          }
+
+          if (!await launchUrl(uri)) {
+            debugPrint('Could not launch $uri');
+          }
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              if (subtitle != null)
-                Text(
-                  subtitle,
-                  style: TextStyle(
-                    color: color.withOpacity(0.8),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
+              if (showIcon) ...[
+                Icon(icon, color: const Color(0xFF00A884), size: 24),
+                const SizedBox(width: 10),
+              ],
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (subtitle != null)
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        color: color.withOpacity(0.8),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  Text(
+                    text,
+                    style: TextStyle(
+                      color: color,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-              Text(
-                text,
-                style: TextStyle(
-                  color: color,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
+                ],
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }

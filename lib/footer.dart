@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'dart:ui';
+import 'package:url_launcher/url_launcher.dart';
 
 class Footer extends StatelessWidget {
   const Footer({super.key});
@@ -141,7 +143,7 @@ class Footer extends StatelessWidget {
             ),
             const SizedBox(height: 15),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () => context.go('/donate'),
               icon: const Icon(Icons.favorite, size: 16),
               label: const Text('DONATE NOW'),
               style: ElevatedButton.styleFrom(
@@ -195,10 +197,20 @@ class Footer extends StatelessWidget {
       ),
     );
 
+    Future<void> launchContact(String contact, bool isEmail) async {
+      final uri = Uri.parse(
+        isEmail ? 'mailto:$contact' : 'tel:${contact.replaceAll(RegExp(r'[^\d+]'), '')}',
+      );
+      
+      if (!await launchUrl(uri)) {
+        debugPrint('Could not launch $uri');
+      }
+    }
+
     return [
       TextButton.icon(
         style: buttonStyle,
-        onPressed: () {},
+        onPressed: () => launchContact('info@ubumwecommunitycenter.rw', true),
         icon: const Icon(Icons.email, color: Color(0xFFFFD84F)),
         label: const Text(
           'info@ubumwecommunitycenter.rw',
@@ -207,7 +219,7 @@ class Footer extends StatelessWidget {
       ),
       TextButton.icon(
         style: buttonStyle,
-        onPressed: () {},
+        onPressed: () => launchContact('+250 788 652 294', false),
         icon: const Icon(Icons.phone, color: Color(0xFFFFD84F)),
         label: const Text(
           '+250 788 652 294',
@@ -216,7 +228,7 @@ class Footer extends StatelessWidget {
       ),
       TextButton.icon(
         style: buttonStyle,
-        onPressed: () {},
+        onPressed: () => launchContact('+1 (614) 420-0824', false),
         icon: const Icon(Icons.phone, color: Color(0xFFFFD84F)),
         label: const Text(
           '+1 (614) 420-0824',

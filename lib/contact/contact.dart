@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactContent extends StatefulWidget {
   const ContactContent({super.key});
@@ -230,59 +231,100 @@ class _ContactItem {
     required this.detail,
   });
 
+  Future<void> _launchUrl() async {
+    final Uri uri;
+
+    switch (icon) {
+      case Icons.phone:
+        uri = Uri.parse('tel:${detail.replaceAll(RegExp(r'[^\d+]'), '')}');
+      case Icons.email:
+        uri = Uri.parse('mailto:$detail');
+      case Icons.location_on:
+        // Encoded address for Google Maps directions
+        final encodedAddress = Uri.encodeComponent(
+            'Ubumwe Community Center, Gisenyi, Rubavu, Rwanda');
+        uri = Uri.parse(
+            'https://www.google.com/maps/dir/?api=1&destination=$encodedAddress');
+      default:
+        return;
+    }
+
+    if (!await launchUrl(
+      uri,
+      mode: icon == Icons.location_on
+          ? LaunchMode.externalApplication
+          : LaunchMode.platformDefault,
+    )) {
+      debugPrint('Could not launch $uri');
+    }
+  }
+
   Widget build() {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 24,
-        vertical: 24,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Colors.white.withOpacity(0.1),
-          width: 1,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: _launchUrl,
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 24,
+            vertical: 24,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.05),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: Colors.white.withOpacity(0.1),
+              width: 1,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFFD700).withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Icon(
-                  icon,
-                  color: const Color(0xFFFFD700),
-                  size: 24,
-                ),
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFFD700).withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Icon(
+                      icon,
+                      color: const Color(0xFFFFD700),
+                      size: 24,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    Icons.open_in_new,
+                    size: 16,
+                    color: Colors.white.withOpacity(0.5),
+                  ),
+                ],
               ),
-              const SizedBox(width: 16),
-              Text(
-                title,
+              const SizedBox(height: 16),
+              SelectableText(
+                detail,
                 style: const TextStyle(
-                  color: Colors.white70,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 16),
-          SelectableText(
-            detail,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

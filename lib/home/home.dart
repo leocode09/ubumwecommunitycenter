@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:ui';
 import 'dart:math' show pi;
+import 'package:url_launcher/url_launcher.dart';
 
 class CircularTextPainter extends CustomPainter {
   final String text;
@@ -156,7 +158,12 @@ class HomeContent extends StatelessWidget {
                                         : 250,
                               ),
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () async {
+                                  final Uri url = Uri.parse('https://www.youtube.com/@ubumwecommunitycentertv');
+                                  if (await canLaunchUrl(url)) {
+                                    await launchUrl(url);
+                                  }
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
                                       Theme.of(context).colorScheme.secondary,
@@ -278,7 +285,7 @@ class HomeContent extends StatelessWidget {
                         ),
                         const SizedBox(height: 30),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () => context.go('/donate'),
                           style: TextButton.styleFrom(
                             backgroundColor: const Color(0xFFFFD966),
                             padding: const EdgeInsets.symmetric(
@@ -562,7 +569,7 @@ class HomeContent extends StatelessWidget {
         const SizedBox(height: 40),
         Center(
           child: TextButton(
-            onPressed: () {},
+            onPressed: () => context.go('/contact'),
             style: TextButton.styleFrom(
               backgroundColor: const Color(0xFFFFD966),
               padding: const EdgeInsets.symmetric(
@@ -688,7 +695,7 @@ class HomeContent extends StatelessWidget {
         ),
         const SizedBox(height: 60),
         TextButton(
-          onPressed: () {},
+          onPressed: () => context.go('/contact'),
           style: TextButton.styleFrom(
             backgroundColor: const Color(0xFFFFD966),
             padding: const EdgeInsets.symmetric(
