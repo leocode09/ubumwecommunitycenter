@@ -119,19 +119,31 @@ class EventsContent extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      color: Theme.of(context).colorScheme.primary,
-      width: double.infinity,
-      child: Column(
-        children: [
-          for (final entry in _galleryData.entries)
-            EventGalleryCard(
-              title: entry.key,
-              images: entry.value["images"] as List<String>,
-              onSeeMoreTapped: () => _launchUrl(entry.value["url"] as String),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isDesktop = constraints.maxWidth > 900;
+        
+        return Container(
+          color: Theme.of(context).colorScheme.primary,
+          width: double.infinity,
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1200),
+              child: Column(
+                children: [
+                  for (final entry in _galleryData.entries)
+                    EventGalleryCard(
+                      title: entry.key,
+                      images: entry.value["images"] as List<String>,
+                      onSeeMoreTapped: () => _launchUrl(entry.value["url"] as String),
+                      isDesktop: isDesktop,
+                    ),
+                ],
+              ),
             ),
-        ],
-      ),
+          ),
+        );
+      },
     );
   }
 
