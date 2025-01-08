@@ -239,6 +239,12 @@ class Footer extends StatelessWidget {
   }
 
   Widget _buildSocialIcons(bool isMobile) {
+    Future<void> launchSocialMedia(String url) async {
+      if (!await launchUrl(Uri.parse(url))) {
+        debugPrint('Could not launch $url');
+      }
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -246,25 +252,25 @@ class Footer extends StatelessWidget {
           iconSize: isMobile ? 24 : 20,
           padding: EdgeInsets.all(isMobile ? 12 : 8),
           icon: const FaIcon(FontAwesomeIcons.facebook, color: Colors.white70),
-          onPressed: () {},
+          onPressed: () => launchSocialMedia('https://www.facebook.com/UbumweCommunityCenter'),
         ),
         IconButton(
           iconSize: isMobile ? 24 : 20,
           padding: EdgeInsets.all(isMobile ? 12 : 8),
           icon: const FaIcon(FontAwesomeIcons.twitter, color: Colors.white70),
-          onPressed: () {},
+          onPressed: () => launchSocialMedia('https://x.com/UbumweCommunity'),
         ),
         IconButton(
           iconSize: isMobile ? 24 : 20,
           padding: EdgeInsets.all(isMobile ? 12 : 8),
           icon: const FaIcon(FontAwesomeIcons.youtube, color: Colors.white70),
-          onPressed: () {},
+          onPressed: () => launchSocialMedia('https://www.youtube.com/@ubumwecommunitycentertv'),
         ),
         IconButton(
           iconSize: isMobile ? 24 : 20,
           padding: EdgeInsets.all(isMobile ? 12 : 8),
           icon: const FaIcon(FontAwesomeIcons.instagram, color: Colors.white70),
-          onPressed: () {},
+          onPressed: () => launchSocialMedia('https://www.instagram.com/ubumwecommunitycenter'),
         ),
       ],
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AboutContent extends StatefulWidget {
@@ -142,7 +143,7 @@ class _AboutContentState extends State<AboutContent>
                       bottom: 16,
                       left: 16,
                       child: Card(
-                        color: const Color(0xFFFFE17D),
+                        color: Theme.of(context).colorScheme.secondary,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 12, vertical: 6),
@@ -475,9 +476,7 @@ class _AboutContentState extends State<AboutContent>
 
               // Call to Action Button
               ElevatedButton(
-                onPressed: () {
-                  // Add navigation to contact page
-                },
+                onPressed: () => context.go('/contact'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF00C897),
                   padding: const EdgeInsets.symmetric(
@@ -488,6 +487,7 @@ class _AboutContentState extends State<AboutContent>
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
+                    color: Color(0xDDFFFFFF),
                   ),
                 ),
               ),

@@ -55,9 +55,30 @@ class _ContactContentState extends State<ContactContent> {
           const SizedBox(height: 24),
           // Submit Button remains the same
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               if (_formKey.currentState!.validate()) {
-                // Handle form submission
+                final body = '''
+Name: ${_nameController.text}
+Phone: ${_phoneController.text}
+
+${_messageController.text}
+''';
+                final Uri emailUri = Uri(
+                  scheme: 'mailto',
+                  path: 'info@ubumwecommunitycenter.rw',
+                  queryParameters: {
+                    'subject': _subjectController.text,
+                    'body': body,
+                  },
+                );
+
+                try {
+                  if (!await launchUrl(emailUri)) {
+                    debugPrint('Could not launch email client');
+                  }
+                } catch (e) {
+                  debugPrint('Error launching email: $e');
+                }
               }
             },
             style: ElevatedButton.styleFrom(

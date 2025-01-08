@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class TopBar extends StatelessWidget {
   final String currentPath;
 
   final List<String> _pageOrder = [
     '/',
+    '/events',
     '/about',
     '/vision',
     '/does',
@@ -24,16 +24,6 @@ class TopBar extends StatelessWidget {
     super.key,
     required this.currentPath,
   });
-
-  void _handleNavigation(BuildContext context, String path) {
-    final currentIndex = _getPageIndex(currentPath);
-    final targetIndex = _getPageIndex(path);
-    final slideFromRight = targetIndex > currentIndex;
-
-    if (context.mounted) {
-      context.push(path, extra: slideFromRight);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +88,13 @@ class TopBar extends StatelessWidget {
                 color: const Color(0xFF283734),
                 padding: const EdgeInsets.only(
                     left: 32, right: 64, top: 32, bottom: 34),
-                child: Image.asset('assets/logo.png'),
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () => context.go('/'),
+                    child: Image.asset('assets/logo.png'),
+                  ),
+                ),
               ),
               Expanded(
                 child: Column(
@@ -185,6 +181,7 @@ class TopBar extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 _buildNavItem(context, 'Home', '/', '/'),
+                                _buildNavItem(context, 'Events', '/events', '/events'),
                                 _buildNavItem(context, 'About Us', '/about', '/about'),
                                 _buildNavItem(context, 'Mission & Vision', '/vision', '/vision'),
                                 _buildNavItem(context, 'What we do', '/does', '/does'),
@@ -239,7 +236,7 @@ class TopBar extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
       child: TextButton(
-        onPressed: () => _handleNavigation(context, path),
+        onPressed: () => context.go(path),
         child: Text(
           label,
           style: TextStyle(
@@ -259,58 +256,43 @@ class TopBar extends StatelessWidget {
     required Color color,
     bool showIcon = true,
   }) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: () async {
-          final Uri uri;
-          if (icon == Icons.phone) {
-            uri = Uri.parse('tel:${text.replaceAll(RegExp(r'[^\d+]'), '')}');
-          } else if (icon == Icons.email) {
-            uri = Uri.parse('mailto:$text');
-          } else {
-            return;
-          }
-
-          if (!await launchUrl(uri)) {
-            debugPrint('Could not launch $uri');
-          }
-        },
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      // decoration: BoxDecoration(
+      //   color: color.withOpacity(0.1),
+      //   borderRadius: BorderRadius.circular(4),
+      // ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (showIcon) ...[
+            Icon(icon, color: const Color(0xFF00A884), size: 24),
+            const SizedBox(width: 10),
+          ],
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (showIcon) ...[
-                Icon(icon, color: const Color(0xFF00A884), size: 24),
-                const SizedBox(width: 10),
-              ],
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (subtitle != null)
-                    Text(
-                      subtitle,
-                      style: TextStyle(
-                        color: color.withOpacity(0.8),
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  Text(
-                    text,
-                    style: TextStyle(
-                      color: color,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
+              if (subtitle != null)
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    color: color.withOpacity(0.8),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
                   ),
-                ],
+                ),
+              Text(
+                text,
+                style: TextStyle(
+                  color: color,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
@@ -335,12 +317,13 @@ class MobileDrawer extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             _buildDrawerNavItem('Home', 0),
-            _buildDrawerNavItem('About Us', 1),
-            _buildDrawerNavItem('Mission & Vision', 2),
-            _buildDrawerNavItem('What we do', 3),
-            _buildDrawerNavItem('Partners', 4),
-            _buildDrawerNavItem('Contact', 5),
-            _buildDrawerNavItem('Tenders', 6),
+            _buildDrawerNavItem('Events', 1),
+            _buildDrawerNavItem('About Us', 2),
+            _buildDrawerNavItem('Mission & Vision', 3),
+            _buildDrawerNavItem('What we do', 4),
+            _buildDrawerNavItem('Partners', 5),
+            _buildDrawerNavItem('Contact', 6),
+            _buildDrawerNavItem('Tenders', 7),
             const Divider(color: Colors.white30),
             _buildDrawerContactInfo(
               icon: Icons.phone,

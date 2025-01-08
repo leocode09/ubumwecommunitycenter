@@ -161,7 +161,20 @@ class HomeContent extends StatelessWidget {
                                 onPressed: () async {
                                   final Uri url = Uri.parse('https://www.youtube.com/@ubumwecommunitycentertv');
                                   if (await canLaunchUrl(url)) {
-                                    await launchUrl(url);
+                                    await launchUrl(
+                                      url,
+                                      mode: LaunchMode.externalApplication,
+                                      webOnlyWindowName: '_blank',
+                                    );
+                                  } else {
+                                    // Handle error - optionally show an error message
+                                    if (context.mounted) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(
+                                          content: Text('Could not launch YouTube channel'),
+                                        ),
+                                      );
+                                    }
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(

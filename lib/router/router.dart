@@ -5,6 +5,7 @@ import '../about/about.dart';
 import '../contact/contact.dart';
 import '../does/does.dart';
 import '../donate/donate.dart';
+import '../events/events.dart';
 import '../home/home.dart';
 import '../partners/partners.dart';
 import '../tenders/tenders.dart';
@@ -27,6 +28,11 @@ final router = GoRouter(
           path: '/',
           name: 'home',
           builder: (context, state) => const HomeContent(),
+        ),
+        GoRoute(
+          path: '/events',
+          name: 'events',
+          builder: (context, state) => const EventsContent(),
         ),
         GoRoute(
           path: '/about',

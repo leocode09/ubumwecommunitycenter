@@ -5,9 +5,11 @@ import 'router/router.dart';
 import 'topbar.dart';
 import 'footer.dart';
 import 'sidebar.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 
 void main() {
+  usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }

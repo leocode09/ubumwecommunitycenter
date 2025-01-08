@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class VisionContent extends StatelessWidget {
@@ -295,11 +296,17 @@ class VisionContent extends StatelessWidget {
                           // Images Section
 
                           const SizedBox(height: 32),
-                          Container(
-                            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 32),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF00C897),
-                              borderRadius: BorderRadius.circular(100),
+                          ElevatedButton(
+                            onPressed: () => context.go('/contact'),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF00C897),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 12,
+                                horizontal: 32,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(100),
+                              ),
                             ),
                             child: const Text(
                               'DISCOVER MORE',

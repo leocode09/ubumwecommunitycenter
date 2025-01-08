@@ -19,6 +19,13 @@ dependencies:
   pdfx: ^2.8.0
   url_launcher: ^6.3.1
   js: ^0.7.1
+  easy_url_launcher: ^0.0.7
+  freezed_annotation: ^2.4.4
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.3.4
+  cached_network_image: ^3.4.1
+  flutter_hooks: ^0.20.5
+  hooks_riverpod: ^2.6.1
 
 flutter:
   uses-material-design: true
@@ -53,3 +60,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  build_runner: ^2.4.8
+  freezed: ^2.4.7
+  json_serializable: ^6.7.1
+  riverpod_generator: ^2.3.11
