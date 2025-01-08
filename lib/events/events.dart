@@ -33,65 +33,86 @@ class EventsContent extends HookConsumerWidget {
     "Day Camp": {
       "url": "https://ubumwecc.pixieset.com/daycamp/",
       "images": [
-        'event1/0E2A6183.jpg',
-        'event1/DSC_0004.jpg',
-        'event1/DSC_0006.jpg',
+        'event3/0E2A0005.jpg',
+        'event3/0E2A0174.jpg', 
+        'event3/0E2A9843.jpg',
+        'event3/0E2A9854.jpg',
+        'event3/DSC_0038.jpg',
+        'event3/DSC_0114.jpg',
+        'event3/DSC_0227.jpg',
+        'event3/DSC_0317.jpg',
+        'event3/DSC_0324.jpg',
+        'event3/DSC_0403.jpg',
+        'event3/FK0A0597.jpg',
+        'event3/FK0A0700.jpg',
+        'event3/FK0A0757.jpg',
+        'event3/FK0A0602.jpg',
       ],
     },
     "IDPD 2024": {
       "url": "https://ubumwecc.pixieset.com/seeyoulearns/idpd2024/",
       "images": [
-        'event1/0E2A6183.jpg',
-        'event1/DSC_0004.jpg',
-        'event1/DSC_0006.jpg',
+        'event4/Screenshot_20241205-160620.png',
+        'event4/WhatsAppImage2024-12-05at14.14.12(1).jpeg',
+        'event4/WhatsAppImage2024-12-05at14.14.17(1).jpeg',
+        'event4/WhatsAppImage2024-12-05at14.14.23.jpeg',
+        'event4/WhatsAppImage2024-12-05at14.14.24.jpeg',
+        'event4/WhatsAppImage2024-12-05at15.48.56.jpeg',
       ],
     },
     "UCC": {
       "url": "https://ubumwecommunitycenter18.pixieset.com/ucc/",
       "images": [
-        'event1/0E2A6183.jpg',
-        'event1/DSC_0004.jpg',
-        'event1/DSC_0006.jpg',
+        'event5/SEE_6275.jpg',
+        'event5/SEE_6286.jpg', 
+        'event5/SEE_6291.jpg',
+        'event5/SEE_6294.jpg',
+        'event5/SEE_6304.jpg',
+        'event5/SEE_6307.jpg',
+        'event5/SEE_6323.jpg',
+        'event5/SEE_6327.jpg',
+        'event5/SEE_6333.jpg',
+        'event5/SEE_6335.jpg',
       ],
     },
-    "UCC - HCS Trip to Karongi": {
-      "url": "https://ubumwecommunitycenter.pixieset.com/ucc-hcstriptokarongi/",
-      "images": [
-        'event1/0E2A6183.jpg',
-        'event1/DSC_0004.jpg',
-        'event1/DSC_0006.jpg',
-      ],
-    },
+    // "UCC - HCS Trip to Karongi": {
+    //   "url": "https://ubumwecommunitycenter.pixieset.com/ucc-hcstriptokarongi/",
+    //   "images": [
+    //     'event1/0E2A6183.jpg',
+    //     'event1/DSC_0004.jpg',
+    //     'event1/DSC_0006.jpg',
+    //   ],
+    // },
     "Meet Super Star in UCC": {
       "url": "https://ubumwecommunitycenter18.pixieset.com/meetsupestarinucc/",
       "images": [
-        'event1/0E2A6183.jpg',
-        'event1/DSC_0004.jpg',
-        'event1/DSC_0006.jpg',
+        'event6/SEE_6378.jpg',
+        'event6/SEE_6383.jpg',
+        'event6/SEE_6384.jpg',
+        'event6/SEE_6389.jpg',
+        'event6/SEE_6396.jpg',
+        'event6/SEE_6398.jpg',
+        'event6/SEE_6408.jpg',
+        'event6/SEE_6421.jpg',
+        'event6/SEE_6422.jpg',
+        'event6/SEE_6427.jpg',
+        'event6/SEE_6460.jpg',
+        'event6/SEE_6467.jpg',
+        'event6/SEE_6501.jpg',
+        'event6/SEE_6523.jpg',
       ],
     },
-    "IDPD 2023": {
+    "see you learns 2023": {
       "url": "https://ubumwecc.pixieset.com/seeyoulearns/idpd2023/",
       "images": [
-        'event1/0E2A6183.jpg',
-        'event1/DSC_0004.jpg',
-        'event1/DSC_0006.jpg',
-      ],
-    },
-    "IDPD 2022": {
-      "url": "https://ubumwecc.pixieset.com/seeyoulearns/idpd2022/",
-      "images": [
-        'event1/0E2A6183.jpg',
-        'event1/DSC_0004.jpg',
-        'event1/DSC_0006.jpg',
-      ],
-    },
-    "IDPD 2021": {
-      "url": "https://ubumwecc.pixieset.com/seeyoulearns/idpd2021/",
-      "images": [
-        'event1/0E2A6183.jpg',
-        'event1/DSC_0004.jpg',
-        'event1/DSC_0006.jpg',
+        'event7/DSC_0014.jpg',
+        'event7/DSC_0017.jpg',
+        'event7/DSC_0018.jpg',
+        'event7/DSC_0020.jpg',
+        'event7/DSC_0027.jpg',
+        'event7/DSC_0028.jpg',
+        'event7/DSC_0029.jpg',
+        'event7/DSC_0048.jpg',
       ],
     },
   };
@@ -101,29 +122,15 @@ class EventsContent extends HookConsumerWidget {
     return Container(
       color: Theme.of(context).colorScheme.primary,
       width: double.infinity,
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1200),
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Wrap(
-              spacing: 16,
-              runSpacing: 16,
-              alignment: WrapAlignment.center,
-              children: [
-                for (final entry in _galleryData.entries)
-                  SizedBox(
-                    width: 380,
-                    child: EventGalleryCard(
-                      title: entry.key,
-                      images: entry.value["images"] as List<String>,
-                      onSeeMoreTapped: () => _launchUrl(entry.value["url"] as String),
-                    ),
-                  ),
-              ],
+      child: Column(
+        children: [
+          for (final entry in _galleryData.entries)
+            EventGalleryCard(
+              title: entry.key,
+              images: entry.value["images"] as List<String>,
+              onSeeMoreTapped: () => _launchUrl(entry.value["url"] as String),
             ),
-          ),
-        ),
+        ],
       ),
     );
   }
