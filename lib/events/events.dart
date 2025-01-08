@@ -124,8 +124,11 @@ class EventsContent extends HookConsumerWidget {
         final isDesktop = constraints.maxWidth > 900;
         
         return Container(
-          color: Theme.of(context).colorScheme.primary,
           width: double.infinity,
+          padding: EdgeInsets.symmetric(
+            horizontal: isDesktop ? 24 : 16,
+            vertical: 24,
+          ),
           child: Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1200),
