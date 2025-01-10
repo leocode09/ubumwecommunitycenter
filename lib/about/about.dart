@@ -195,8 +195,8 @@ class _AboutContentState extends State<AboutContent>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'The Rwandan genocide ended in 1994, but pockets of resistance still lingered for years. '
-                    'In 1999, a fifteen-year-old Rwandan boy, Frederick Ndabaramiye, was dragged from a bus '
+                    'The Genocide Against Tutsi ended in 1994, but pockets of resistance still lingered for years. '
+                    'In 1998, a fifteen-year-old Rwandan boy, Frederick Ndabaramiye, was dragged from a bus '
                     'and brutally attacked by Interahamwe rebels. When he refused to kill 18 fellow passengers, '
                     'the rebels hacked off Frederick\'s hands with machetes and left him for dead.\n\n'
                     'After a year in the hospital, Frederick was placed at the Imbabazi, an orphanage started '

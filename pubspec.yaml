@@ -27,6 +27,8 @@ dependencies:
   flutter_hooks: ^0.20.5
   hooks_riverpod: ^2.6.1
   flutter_carousel_slider: ^1.1.0
+  flutter_animate: ^4.5.2
+  visibility_detector: ^0.4.0+2
 
 flutter:
   uses-material-design: true

@@ -225,23 +225,4 @@ class EventGalleryCard extends HookConsumerWidget {
     );
   }
 
-  double _calculateImageWidth(double containerWidth, bool isDesktop) {
-    // Calculate number of images per row based on container width
-    final spacing = isDesktop ? 16.0 : 8.0;
-    int imagesPerRow;
-    
-    if (containerWidth > 1100) {
-      imagesPerRow = 4;
-    } else if (containerWidth > 800) {
-      imagesPerRow = 3;
-    } else if (containerWidth > 600) {
-      imagesPerRow = 2;
-    } else {
-      imagesPerRow = 1;
-    }
-
-    // Calculate image width accounting for spacing
-    final totalSpacing = spacing * (imagesPerRow - 1);
-    return (containerWidth - totalSpacing) / imagesPerRow;
-  }
 }
