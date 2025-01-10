@@ -270,7 +270,7 @@ class _AboutContentState extends State<AboutContent>
                     ),
                     const SizedBox(height: 32),
                     const Text(
-                      'A census carried out by the Rwandan ministry of Local Government in 2002 indicated that a total of 1,074,017 people were killed in the 100 days of the 1994 genocide. This census details names of the dead, dwelling place, age, and how they were killed.\n\n'
+                      'A total of 1,074,017 people were killed in the 100 days of the 1994 genocide. This census details names of the dead, dwelling place, age, and how they were killed.\n\n'
                       'Thousands more were maimed or mutilated as rebel attacks continued for a few years after the 1994 genocide. More than 300,000 children were separated from their families or orphaned.\n\n'
                       'Rwanda, a small, landlocked nation in Central Africa, was one of the poorest and most underdeveloped nations in the world just after the genocide.\n\n'
                       'In the new Rwanda Economic Update (REU), the World Bank projects economic growth rate of 7.4% in 2015 and 7.6% in 2016.\n\n'

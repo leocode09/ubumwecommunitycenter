@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'router/router.dart';
 import 'topbar.dart';
 import 'footer.dart';
@@ -11,7 +12,7 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

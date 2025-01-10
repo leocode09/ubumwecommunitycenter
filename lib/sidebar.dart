@@ -74,12 +74,12 @@ class Sidebar extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     children: [
                       _buildDrawerNavItem(context, 'Home', '/'),
-                      _buildDrawerNavItem(context, 'Events', '/events'),
                       _buildDrawerNavItem(context, 'About Us', '/about'),
                       _buildDrawerNavItem(context, 'Mission & Vision', '/vision'),
                       _buildDrawerNavItem(context, 'What we do', '/does'),
                       _buildDrawerNavItem(context, 'Partners', '/partners'),
                       _buildDrawerNavItem(context, 'Contact', '/contact'),
+                      _buildDrawerNavItem(context, 'Events', '/events'),
                       _buildDrawerNavItem(context, 'Tenders', '/tenders'),
                       
                       const Padding(

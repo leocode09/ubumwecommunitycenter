@@ -96,6 +96,15 @@ class EventGalleryCard extends HookConsumerWidget {
                             child: Image.asset(
                               images[0],
                               fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                debugPrint('Error loading image: $error');
+                                return Container(
+                                  color: Colors.grey[800],
+                                  child: const Center(
+                                    child: Icon(Icons.error_outline, color: Colors.white),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         // Overlay gradient

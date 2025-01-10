@@ -3,35 +3,134 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'dart:ui';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:async';
 
-class Footer extends StatelessWidget {
+extension IntModulo on int {
+  int modulo(int n) => ((this % n) + n) % n;
+}
+
+class Footer extends StatefulWidget {
   const Footer({super.key});
+
+  @override
+  State<Footer> createState() => _FooterState();
+}
+
+class _FooterState extends State<Footer> {
+  final ScrollController _scrollController = ScrollController();
+  Timer? _timer;
+
+  final List<String> _partnerLogos = const [
+    'assets/partners/better.png',
+    'assets/partners/camphillnorth.png',
+    'assets/partners/cbb.png',
+    'assets/partners/hcs.png',
+    'assets/partners/hope.png',
+    'assets/partners/zoo.png',
+    'assets/partners/partners.png',
+    'assets/partners/point_foundation.png',
+    'assets/partners/rotary_international.png',
+    'assets/partners/rwanda_gov.png',
+    'assets/partners/ssu.png',
+    'assets/partners/yara.png',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _startAutoScroll();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _startAutoScroll() {
+    const duration = Duration(seconds: 3);
+    _timer = Timer.periodic(duration, (timer) {
+      if (_scrollController.hasClients) {
+        final currentPosition = _scrollController.offset;
+        final screenWidth = _scrollController.position.viewportDimension;
+        final itemWidth = screenWidth / (MediaQuery.of(context).size.width < 800 ? 2 : 4);
+        
+        final nextPosition = currentPosition + itemWidth;
+        
+        if (nextPosition >= _scrollController.position.maxScrollExtent) {
+          _scrollController.animateTo(
+            0,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInOut,
+          );
+        } else {
+          _scrollController.animateTo(
+            nextPosition,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInOut,
+          );
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final isMobile = constraints.maxWidth < 800; // Breakpoint for mobile
-
         return Column(
           children: [
-            // Partner logos container
             Container(
               width: double.infinity,
+              height: 120,
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               color: const Color.fromARGB(255, 255, 217, 79),
-              child: Wrap( // Changed from Row to Wrap
-                alignment: WrapAlignment.spaceEvenly,
-                spacing: 20,
-                runSpacing: 20,
-                children: [
-                  Image.asset('assets/hcs.png', height: 60),
-                  Image.asset('assets/better.png', height: 60),
-                  Image.asset('assets/camphillnorth.png', height: 60),
-                  Image.asset('assets/cbb.png', height: 60),
-                  Image.asset('assets/hope.png', height: 60),
-                  Image.asset('assets/zoo.png', height: 60),
-                ],
+              child: ShaderMask(
+                shaderCallback: (Rect bounds) {
+                  return LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      Colors.white,
+                      Colors.white.withOpacity(0.02),
+                    ],
+                    stops: const [0.95, 1.0],
+                  ).createShader(bounds);
+                },
+                blendMode: BlendMode.dstIn,
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final isMobile = constraints.maxWidth < 800;
+                    final itemsPerScreen = isMobile ? 2 : 4; // Show 4 items on desktop
+                    return ListView.builder(
+                      controller: _scrollController,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _partnerLogos.length * 2,
+                      itemBuilder: (context, index) {
+                        final actualIndex = index % _partnerLogos.length;
+                        return Container(
+                          width: constraints.maxWidth / itemsPerScreen,
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Opacity(
+                            opacity: 0.7,
+                            child: Image.asset(
+                              _partnerLogos[actualIndex],
+                              height: 60,
+                              fit: BoxFit.contain,
+                              errorBuilder: (context, error, stackTrace) {
+                                debugPrint('Error loading image: ${_partnerLogos[actualIndex]} - $error');
+                                return const Center(
+                                  child: Icon(Icons.broken_image, color: Colors.red, size: 30),
+                                );
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             ),
             Container(
@@ -39,7 +138,7 @@ class Footer extends StatelessWidget {
                 image: DecorationImage(
                   image: const AssetImage('assets/site-footer-bg.jpg'),
                   fit: BoxFit.cover,
-                  opacity: 0.9,
+                  opacity: 0.6,
                   colorFilter: ColorFilter.mode(
                     Theme.of(context).primaryColor.withOpacity(0.9),
                     BlendMode.multiply,
@@ -68,7 +167,7 @@ class Footer extends StatelessWidget {
                         // Main content area
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: isMobile
+                          child: constraints.maxWidth < 800
                               ? Column( // Mobile layout
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [

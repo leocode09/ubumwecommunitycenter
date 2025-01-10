@@ -26,11 +26,21 @@ dependencies:
   cached_network_image: ^3.4.1
   flutter_hooks: ^0.20.5
   hooks_riverpod: ^2.6.1
+  flutter_carousel_slider: ^1.1.0
 
 flutter:
   uses-material-design: true
   assets:
     - assets/
+    - assets/event1/
+    - assets/event2/
+    - assets/event3/
+    - assets/event4/
+    - assets/event5/
+    - assets/event6/
+    - assets/event7/
+    - assets/event8/
+    - assets/partners/
     - assets/TenderNoticeEu2024-1.png
     - assets/TenderNoticeEu2024-2.png
     - assets/TenderNoticeEu2024.pdf

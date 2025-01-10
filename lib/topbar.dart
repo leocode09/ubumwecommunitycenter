@@ -6,12 +6,12 @@ class TopBar extends StatelessWidget {
 
   final List<String> _pageOrder = [
     '/',
-    '/events',
     '/about',
     '/vision',
     '/does',
     '/partners',
     '/contact',
+    '/events',
     '/tenders',
     '/donate'
   ];
@@ -181,12 +181,12 @@ class TopBar extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 _buildNavItem(context, 'Home', '/', '/'),
-                                _buildNavItem(context, 'Events', '/events', '/events'),
                                 _buildNavItem(context, 'About Us', '/about', '/about'),
                                 _buildNavItem(context, 'Mission & Vision', '/vision', '/vision'),
                                 _buildNavItem(context, 'What we do', '/does', '/does'),
                                 _buildNavItem(context, 'Partners', '/partners', '/partners'),
                                 _buildNavItem(context, 'Contact', '/contact', '/contact'),
+                                _buildNavItem(context, 'Events', '/events', '/events'),
                                 _buildNavItem(context, 'Tenders', '/tenders', '/tenders'),
                               ],
                             ),),
@@ -317,12 +317,12 @@ class MobileDrawer extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             _buildDrawerNavItem('Home', 0),
-            _buildDrawerNavItem('Events', 1),
-            _buildDrawerNavItem('About Us', 2),
-            _buildDrawerNavItem('Mission & Vision', 3),
-            _buildDrawerNavItem('What we do', 4),
-            _buildDrawerNavItem('Partners', 5),
-            _buildDrawerNavItem('Contact', 6),
+            _buildDrawerNavItem('About Us', 1),
+            _buildDrawerNavItem('Mission & Vision', 2),
+            _buildDrawerNavItem('What we do', 3),
+            _buildDrawerNavItem('Partners', 4),
+            _buildDrawerNavItem('Contact', 5),
+            _buildDrawerNavItem('Events', 6),
             _buildDrawerNavItem('Tenders', 7),
             const Divider(color: Colors.white30),
             _buildDrawerContactInfo(

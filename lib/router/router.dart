@@ -30,11 +30,6 @@ final router = GoRouter(
           builder: (context, state) => const HomeContent(),
         ),
         GoRoute(
-          path: '/events',
-          name: 'events',
-          builder: (context, state) => const EventsContent(),
-        ),
-        GoRoute(
           path: '/about',
           name: 'about',
           builder: (context, state) => const AboutContent(),
@@ -58,6 +53,11 @@ final router = GoRouter(
           path: '/contact',
           name: 'contact',
           builder: (context, state) => const ContactContent(),
+        ),
+        GoRoute(
+          path: '/events',
+          name: 'events',
+          builder: (context, state) => const EventsContent(),
         ),
         GoRoute(
           path: '/tenders',

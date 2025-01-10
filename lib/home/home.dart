@@ -39,12 +39,44 @@ class CircularTextPainter extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
 
-class HomeContent extends StatelessWidget {
+class HomeContent extends StatefulWidget {
   const HomeContent({super.key});
+
+  @override
+  State<HomeContent> createState() => _HomeContentState();
+}
+
+class _HomeContentState extends State<HomeContent> {
+  final ScrollController _scrollController = ScrollController();
+  double _offset = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      setState(() {
+        _offset = _scrollController.offset;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    setState(() {
+      _offset = _scrollController.offset;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      controller: _scrollController,
       child: Container(
         color: const Color(0xFF283734),
         child: Column(
@@ -239,13 +271,19 @@ class HomeContent extends StatelessWidget {
               height: 500,
               width: double.infinity,
               child: Stack(
+                clipBehavior: Clip.none,
                 children: [
-                  SizedBox(
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: Image.asset(
-                      'assets/become-volunteer-one-bg.jpg',
-                      fit: BoxFit.cover,
+                  Positioned(
+                    top: -_offset * 0.3,
+                    left: 0,
+                    right: 0,
+                    child: SizedBox(
+                      height: 700,
+                      child: Image.asset(
+                        'assets/become-volunteer-one-bg.jpg',
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                      ),
                     ),
                   ),
                   Positioned(
