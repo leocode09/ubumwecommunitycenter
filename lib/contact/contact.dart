@@ -65,7 +65,7 @@ ${_messageController.text}
 ''';
                 final Uri emailUri = Uri(
                   scheme: 'mailto',
-                  path: 'info@ubumwecommunitycenter.rw',
+                  path: 'info@uccenter.online',
                   queryParameters: {
                     'subject': _subjectController.text,
                     'body': body,
@@ -136,7 +136,7 @@ ${_messageController.text}
       const _ContactItem(
         icon: Icons.email,
         title: 'Email',
-        detail: 'info@ubumwecommunitycenter.rw',
+        detail: 'info@uccenter.online',
       ),
       const _ContactItem(
         icon: Icons.location_on,

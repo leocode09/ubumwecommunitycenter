@@ -112,7 +112,7 @@ class Sidebar extends StatelessWidget {
                       ),
                       _buildDrawerContactInfo(
                         icon: Icons.email,
-                        text: 'info@ubumwecommunitycenter.rw',
+                        text: 'info@uccenter.online',
                         subtitle: 'Send email',
                       ),
                     ],

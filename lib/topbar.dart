@@ -4,21 +4,17 @@ import 'package:go_router/go_router.dart';
 class TopBar extends StatelessWidget {
   final String currentPath;
 
-  final List<String> _pageOrder = [
-    '/',
-    '/about',
-    '/vision',
-    '/does',
-    '/partners',
-    '/contact',
-    '/events',
-    '/tenders',
-    '/donate'
+  final List<(String, String)> _pageOrder = [
+    ('Home', '/'),
+    ('About Us', '/about'),
+    ('Mission & Vision', '/vision'),
+    ('What we do', '/does'),
+    ('Partners', '/partners'),
+    ('Contact', '/contact'),
+    ('Events', '/events'),
+    ('Tenders', '/tenders'),
+    ('Donate', '/donate'),
   ];
-
-  int _getPageIndex(String path) {
-    return _pageOrder.indexOf(path);
-  }
 
   TopBar({
     super.key,
@@ -162,7 +158,7 @@ class TopBar extends StatelessWidget {
                             const SizedBox(width: 8),
                             _buildContactInfo(
                               icon: Icons.email,
-                              text: 'info@ubumwecommunitycenter.rw',
+                              text: 'info@uccenter.online',
                               subtitle: 'Send email',
                               color: Colors.white,
                             ),
@@ -179,17 +175,17 @@ class TopBar extends StatelessWidget {
                           Expanded(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                _buildNavItem(context, 'Home', '/', '/'),
-                                _buildNavItem(context, 'About Us', '/about', '/about'),
-                                _buildNavItem(context, 'Mission & Vision', '/vision', '/vision'),
-                                _buildNavItem(context, 'What we do', '/does', '/does'),
-                                _buildNavItem(context, 'Partners', '/partners', '/partners'),
-                                _buildNavItem(context, 'Contact', '/contact', '/contact'),
-                                _buildNavItem(context, 'Events', '/events', '/events'),
-                                _buildNavItem(context, 'Tenders', '/tenders', '/tenders'),
-                              ],
-                            ),),
+                              children: _pageOrder
+                                  .where((item) => item.$2 != '/donate') // Skip donate button
+                                  .map((item) => _buildNavItem(
+                                        context,
+                                        item.$1,
+                                        item.$2,
+                                        item.$2,
+                                      ))
+                                  .toList(),
+                            ),
+                          ),
                           Padding(padding: const EdgeInsets.only(right: 32),
                           child: ElevatedButton.icon(
                             onPressed: () => context.go('/donate'),
@@ -337,7 +333,7 @@ class MobileDrawer extends StatelessWidget {
             ),
             _buildDrawerContactInfo(
               icon: Icons.email,
-              text: 'info@ubumwecommunitycenter.rw',
+              text: 'info@uccenter.online',
               subtitle: 'Send email',
             ),
             Padding(

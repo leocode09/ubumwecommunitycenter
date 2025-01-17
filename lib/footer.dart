@@ -309,10 +309,10 @@ class _FooterState extends State<Footer> {
     return [
       TextButton.icon(
         style: buttonStyle,
-        onPressed: () => launchContact('info@ubumwecommunitycenter.rw', true),
+        onPressed: () => launchContact('info@uccenter.online', true),
         icon: const Icon(Icons.email, color: Color(0xFFFFD84F)),
         label: const Text(
-          'info@ubumwecommunitycenter.rw',
+          'info@uccenter.online',
           style: TextStyle(color: Colors.white70),
         ),
       ),
