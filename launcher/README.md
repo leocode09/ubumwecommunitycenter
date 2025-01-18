@@ -1,6 +1,6 @@
 # launcher
 
-A new Flutter project.
+Disability is not Inability.
 
 ## Getting Started
 
