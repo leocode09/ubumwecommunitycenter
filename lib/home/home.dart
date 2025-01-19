@@ -316,7 +316,7 @@ class _HomeContentState extends State<HomeContent> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Become volunteers',
+                          'Become a Volunteer',
                           textAlign: TextAlign.center,
                           style: GoogleFonts.caveat(
                             fontSize: 32,

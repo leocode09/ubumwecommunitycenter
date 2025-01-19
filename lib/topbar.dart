@@ -118,7 +118,7 @@ class TopBar extends StatelessWidget {
                                     child: Image.asset('assets/main-menu-heart-icon.png'),
                                   ),
                                   const SizedBox(width: 16),
-                                  const Text('Become a volunteers',
+                                  const Text('Become a volunteer',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 24,
